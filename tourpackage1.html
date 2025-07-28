@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour Packages | Sai Dharma Tours and Travels</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 200, 124, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(168, 216, 234, 0.05) 0%, transparent 20%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, #1a3a5f, #2c5a8a);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        .logo-icon {
+            font-size: 2.5rem;
+            color: #ffc107;
+            animation: pulse 2s infinite, float 3s ease-in-out infinite;
+        }
+        
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            position: relative;
+        }
+        
+        .logo-text span {
+            color: #ffc107;
+        }
+        
+        .logo-text::after {
+            position: absolute;
+            top: -10px;
+            right: -25px;
+            font-size: 1.2rem;
+            opacity: 0.7;
+            animation: rotate 8s linear infinite;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: #ffc107;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 70%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background:  url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 120px 20px;
+            margin-bottom: 60px;
+            animation: slideIn 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath fill='%23ffc107' fill-opacity='0.1' d='M40,40 C20,80 60,120 40,160 C20,200 80,180 120,160 C160,140 180,100 160,60 C140,20 100,0 60,20 Z'/%3E%3C/svg%3E");
+            background-size: 200px;
+            animation: floatBackground 40s linear infinite;
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out;
+            position: relative;
+        }
+        
+        .hero h1::after {
+            content: "";
+            display: block;
+            width: 120px;
+            height: 4px;
+            background: #ffc107;
+            margin: 20px auto;
+            border-radius: 2px;
+            animation: expandLine 1.5s ease-out;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            animation: fadeInUp 1.2s ease-out;
+            position: relative;
+        }
+        
+        .floating-icons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .floating-icon {
+            position: absolute;
+            font-size: 1.8rem;
+            color: rgba(255, 255, 255, 0.2);
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .floating-icon:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .floating-icon:nth-child(2) {
+            top: 40%;
+            left: 80%;
+            animation-delay: -2s;
+        }
+        
+        .floating-icon:nth-child(3) {
+            top: 70%;
+            left: 15%;
+            animation-delay: -4s;
+        }
+        
+        .floating-icon:nth-child(4) {
+            top: 60%;
+            left: 85%;
+            animation-delay: -1s;
+        }
+        
+        /* Intro Section */
+        .intro {
+            background: white;
+            border-radius: 15px;
+            padding: 50px;
+            margin: -50px auto 50px;
+            max-width: 900px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 1.5s ease-out;
+            transform: translateY(0);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .intro::before {
+            content: "ॐ";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 15rem;
+            color: rgba(26, 58, 95, 0.02);
+            z-index: -1;
+            animation: rotate 60s linear infinite;
+        }
+        
+        .intro:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .intro h2 {
+            text-align: center;
+            color: #1a3a5f;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 25px;
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            padding: 0 20px;
+            background: white;
+            z-index: 1;
+        }
+        
+        .intro h2::before, .intro h2::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #ffc107);
+            z-index: -1;
+        }
+        
+        .intro h2::before {
+            right: 100%;
+        }
+        
+        .intro h2::after {
+            left: 100%;
+            background: linear-gradient(to left, transparent, #ffc107);
+        }
+        
+        .intro p {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+            max-width: 750px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Tour Packages Grid */
+        .tour-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 20px 0 60px;
+        }
+        
+        .tour-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            animation: fadeInUp 0.8s ease-out;
+            transform: translateY(0);
+            opacity: 0;
+            animation-fill-mode: forwards;
+            perspective: 1000px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .tour-card:nth-child(1) { animation-delay: 0.2s; }
+        .tour-card:nth-child(2) { animation-delay: 0.4s; }
+        .tour-card:nth-child(3) { animation-delay: 0.6s; }
+        .tour-card:nth-child(4) { animation-delay: 0.8s; }
+        .tour-card:nth-child(5) { animation-delay: 1.0s; }
+        .tour-card:nth-child(6) { animation-delay: 1.2s; }
+        
+        .tour-card:hover {
+            transform: translateY(-15px) rotateY(5deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-header {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+        
+        .card-number {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #ffc107;
+            color: #1a3a5f;
+            font-weight: 700;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+        
+        .tour-card:hover .card-number {
+            transform: scale(1.1);
+            background: #1a3a5f;
+            color: #ffc107;
+        }
+        
+        .card-image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.5s ease;
+        }
+        
+        .tour-card:hover .card-image {
+            transform: scale(1.1);
+        }
+        
+        .card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(26, 58, 95, 0.9), transparent);
+            padding: 20px;
+            color: white;
+        }
+        
+        .card-overlay h3 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            font-family: 'Merriweather', serif;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        .card-overlay .location {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .card-content {
+            padding: 25px;
+        }
+        
+        .card-content p {
+            color: #555;
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+            min-height: 100px;
+        }
+        
+        .card-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .highlight {
+            background: rgba(26, 58, 95, 0.07);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .highlight i {
+            color: #ffc107;
+            font-size: 0.8rem;
+        }
+        
+        .know-more {
+            display: inline-block;
+            background: linear-gradient(to right, #1a3a5f, #2c5a8a);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(26, 58, 95, 0.3);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+            z-index: 1;
+        }
+        
+        .know-more::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+        
+        .know-more:hover::before {
+            left: 100%;
+        }
+        
+        .know-more:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(26, 58, 95, 0.4);
+        }
+        
+        .state-tag {
+            display: inline-block;
+            background: linear-gradient(to right, #ffc107, #ff9800);
+            color: #1a3a5f;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 10px;
+            box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3);
+        }
+        
+        /* Testimonial Section */
+        .testimonials {
+            background: linear-gradient(to right, #1a3a5f, #2c5a8a);
+            padding: 80px 0;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonials::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath fill='%23ffc107' fill-opacity='0.05' d='M40,40 C20,80 60,120 40,160 C20,200 80,180 120,160 C160,140 180,100 160,60 C140,20 100,0 60,20 Z'/%3E%3C/svg%3E");
+            background-size: 200px;
+            animation: floatBackground 30s linear infinite;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: #ffc107;
+            margin: 15px auto;
+            border-radius: 2px;
+            animation: expandLine 1.5s ease-out;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .testimonial-card {
+            /* background: rgba(255, 255, 255, 0.1); */
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            /* border: 1px solid rgba(255, 255, 255, 0.1); */
+            text-align: left;
+            transform: translateY(30px);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .testimonial-card:nth-child(1) { animation-delay: 0.2s; }
+        .testimonial-card:nth-child(2) { animation-delay: 0.4s; }
+        .testimonial-card:nth-child(3) { animation-delay: 0.6s; }
+        
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 20px;
+            line-height: 1.8;
+            position: relative;
+        }
+        
+        .testimonial-content::before {
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            font-size: 5rem;
+            color: rgba(255, 255, 255, 0.1);
+            font-family: Georgia, serif;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #ffc107;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #1a3a5f;
+            font-size: 1.2rem;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(to right, #0e2640, #1a3a5f);
+            color: #e0e0e0;
+            padding: 80px 0 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath fill='%23ffc107' fill-opacity='0.05' d='M40,40 C20,80 60,120 40,160 C20,200 80,180 120,160 C160,140 180,100 160,60 C140,20 100,0 60,20 Z'/%3E%3C/svg%3E");
+            background-size: 200px;
+            animation: floatBackground 30s linear infinite;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo span {
+            color: #ffc107;
+        }
+        
+        .footer-info p {
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: #ffc107;
+            transform: translateY(-5px);
+        }
+        
+        .footer-links h4 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .footer-links h4::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #ffc107;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-links a:hover {
+            color: #ffc107;
+            transform: translateX(5px);
+        }
+        
+        .footer-links i {
+            font-size: 0.8rem;
+            color: #ffc107;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(to right, #1a3a5f, #2c5a8a);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            background: linear-gradient(to right, #ffc107, #ff9800);
+            transform: translateY(-3px);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes expandLine {
+            from { width: 0; }
+            to { width: 120px; }
+        }
+        
+        @keyframes floatBackground {
+            0% { background-position: 0 0; }
+            100% { background-position: 200px 200px; }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .tour-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 0;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .hero {
+                padding: 80px 20px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .intro {
+                padding: 30px;
+                margin-top: -40px;
+            }
+            
+            .card-overlay h3 {
+                font-size: 1.6rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .intro {
+                padding: 25px 20px;
+            }
+            
+            .intro h2 {
+                font-size: 1.8rem;
+            }
+            
+            .card-overlay h3 {
+                font-size: 1.4rem;
+            }
+            
+            .tour-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-dharmachakra"></i>
+                </div>
+                <div class="logo-text"><a href="services2.html" style="color: white; text-decoration: none;">Sai <span>Dharma Tours & Travels</span></a></div>
+            </div>
+            <!-- <nav>
+                <ul>
+                    <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#"><i class="fas fa-map-marked-alt"></i> Tours</a></li>
+                    <li><a href="#"><i class="fas fa-hotel"></i> Packages</a></li>
+                    <li><a href="#"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="#"><i class="fas fa-phone-alt"></i> Contact</a></li>
+                </ul>
+            </nav> -->
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Discover Spiritual India</h1>
+            <p>Embark on a journey of self-discovery with our carefully crafted spiritual tours to India's most sacred destinations</p>
+        </div>
+        <!-- <div class="floating-icons">
+             <div class="floating-icon">ॐ</div> -->
+            <!-- <div class="floating-icon"><i class="fas fa-lotus"></i></div> -->
+            <!-- <div class="floating-icon">ॐ</div> 
+            <div class="floating-icon"><i class="fas fa-pray"></i></div>
+        </div> -->
+    </section>
+
+    <!-- Intro Section -->
+    <section class="container">
+        <div class="intro">
+            <h2>Tours & Packages</h2>
+            <p>This is your gateway to transformative spiritual journeys. We've curated exceptional tour experiences to India's most revered destinations. Each package offers a unique blend of spiritual enrichment, cultural immersion, and personal discovery. Explore our offerings below and begin your journey to inner peace and enlightenment.</p>
+        </div>
+    </section>
+
+    <!-- Tour Packages Grid -->
+    <section class="container">
+        <div class="tour-grid">
+            <!-- Puttaparthi -->
+            <div class="tour-card">
+                <div class="card-header">
+                    <div class="card-number">01</div>
+                    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1593696140826-c58b021acf8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+                    <div class="card-overlay">
+                        <h3>Puttaparthi</h3>
+                        <div class="location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Andhra Pradesh</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <p>The Sri Sathya Sai Baba Ashram is a serene spiritual destination with the Chaitanya Jyoti Museum and meditation centers. The peaceful atmosphere attracts devotees and tourists from around the world.</p>
+                    <div class="card-highlights">
+                        <div class="highlight"><i class="fas fa-meditation"></i> Meditation</div>
+                        <div class="highlight"><i class="fas fa-temple"></i> Ashram Visit</div>
+                        <div class="highlight"><i class="fas fa-museum"></i> Museum Tour</div>
+                    </div>
+                    <div class="state-tag">Spiritual Retreat</div>
+                    <div style="margin-top: 20px;">
+                        <a href="#" class="know-more">Know More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Andhra Pradesh -->
+            <div class="tour-card">
+                <div class="card-header">
+                    <div class="card-number">02</div>
+                    <div class="card-image" style="background-image: url('images/t2.webp');"></div>
+                    <div class="card-overlay">
+                        <h3>Andhra Pradesh</h3>
+                        <div class="location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>South India</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <p>Famous for the Tirupati Balaji Temple, the beaches of Visakhapatnam, and the ancient Buddhist site of Amaravati. The state also boasts rich cultural heritage with traditional art forms.</p>
+                    <div class="card-highlights">
+                        <div class="highlight"><i class="fas fa-temple"></i> Tirupati Temple</div>
+                        <div class="highlight"><i class="fas fa-umbrella-beach"></i> Beaches</div>
+                        <div class="highlight"><i class="fas fa-history"></i> Heritage Sites</div>
+                    </div>
+                    <div class="state-tag">Cultural Experience</div>
+                    <div style="margin-top: 20px;">
+                        <a href="#" class="know-more">Know More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tamil Nadu -->
+            <div class="tour-card">
+                <div class="card-header">
+                    <div class="card-number">03</div>
+                    <div class="card-image" style="background-image: url('images/t3.jpeg');"></div>
+                    <div class="card-overlay">
+                        <h3>Tamil Nadu</h3>
+                        <div class="location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>South India</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <p>Renowned for the iconic temples of Madurai, scenic hill stations like Ooty, and the historic rock-cut monuments of Mahabalipuram. Tamil Nadu also offers vibrant cultural festivals.</p>
+                    <div class="card-highlights">
+                        <div class="highlight"><i class="fas fa-temple"></i> Madurai Temple</div>
+                        <div class="highlight"><i class="fas fa-mountain"></i> Hill Stations</div>
+                        <div class="highlight"><i class="fas fa-utensils"></i> Cuisine</div>
+                    </div>
+                    <div class="state-tag">Temple Trail</div>
+                    <div style="margin-top: 20px;">
+                        <a href="#" class="know-more">Know More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kerala -->
+            <div class="tour-card">
+                <div class="card-header">
+                    <div class="card-number">04</div>
+                    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80');"></div>
+                    <div class="card-overlay">
+                        <h3>Kerala</h3>
+                        <div class="location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>South India</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <p>Called "God's Own Country," it's famous for its backwaters in Alleppey, tea plantations in Munnar, and scenic beaches like Varkala. Don't miss the traditional Kathakali dance experiences.</p>
+                    <div class="card-highlights">
+                        <div class="highlight"><i class="fas fa-water"></i> Backwaters</div>
+                        <div class="highlight"><i class="fas fa-leaf"></i> Tea Plantations</div>
+                        <div class="highlight"><i class="fas fa-spa"></i> Ayurveda</div>
+                    </div>
+                    <div class="state-tag">Backwater Bliss</div>
+                    <div style="margin-top: 20px;">
+                        <a href="#" class="know-more">Know More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Karnataka -->
+            <div class="tour-card">
+                <div class="card-header">
+                    <div class="card-number">05</div>
+                    <div class="card-image" style="background-image: url('images/k1.jpeg');"></div>
+                    <div class="card-overlay">
+                        <h3>Karnataka</h3>
+                        <div class="location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>South India</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <p>Famous for the Mysore Palace, the ancient ruins of Hampi, and the lush green hills of Coorg. Visitors can also explore the bustling city of Bangalore, known as India's Silicon Valley.</p>
+                    <div class="card-highlights">
+                        <div class="highlight"><i class="fas fa-landmark"></i> Mysore Palace</div>
+                        <div class="highlight"><i class="fas fa-ruins"></i> Hampi Ruins</div>
+                        <div class="highlight"><i class="fas fa-tree"></i> Coorg Hills</div>
+                    </div>
+                    <div class="state-tag">Heritage & Nature</div>
+                    <div style="margin-top: 20px;">
+                        <a href="#" class="know-more">Know More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Telangana -->
+            <div class="tour-card">
+                <div class="card-header">
+                    <div class="card-number">06</div>
+                    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1565967511849-76a60a516170?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80');"></div>
+                    <div class="card-overlay">
+                        <h3>Telangana</h3>
+                        <div class="location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>South India</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <p>Highlights include the historic Charminar, the grand Golconda Fort in Hyderabad, and the serene Nagarjuna Sagar Dam. The state also boasts modern attractions like Ramoji Film City.</p>
+                    <div class="card-highlights">
+                        <div class="highlight"><i class="fas fa-fort"></i> Golconda Fort</div>
+                        <div class="highlight"><i class="fas fa-monument"></i> Charminar</div>
+                        <div class="highlight"><i class="fas fa-city"></i> Modern Attractions</div>
+                    </div>
+                    <div class="state-tag">Historic & Modern</div>
+                    <div style="margin-top: 20px;">
+                        <a href="#" class="know-more">Know More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Travelers Say</h2>
+            <p>Hear from those who have experienced spiritual journeys with us</p>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "The Puttaparthi tour was a life-changing experience. The peaceful atmosphere and spiritual guidance helped me find inner peace I didn't know I was missing."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">R</div>
+                        <div class="author-info">
+                            <h4>Rajesh Kumar</h4>
+                            <p>Spiritual Seeker</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "Sai Dharma Tours organized the perfect Kerala trip for our family. The backwaters, Ayurvedic treatments, and temple visits created a perfect balance of relaxation and spirituality."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">P</div>
+                        <div class="author-info">
+                            <h4>Priya Sharma</h4>
+                            <p>Family Traveler</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "The attention to detail in the Karnataka heritage tour was exceptional. From the Mysore Palace to Hampi ruins, every moment was filled with awe and spiritual connection."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">M</div>
+                        <div class="author-info">
+                            <h4>Michael Johnson</h4>
+                            <p>International Traveler</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="footer-logo">Sai <span>Dharma</span></div>
+                    <p>Your trusted partner for spiritual journeys across India. We specialize in creating meaningful travel experiences that nourish the soul.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Tour Packages</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Top Destinations</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Puttaparthi</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Tirupati</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Shirdi</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Varanasi</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Haridwar</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Contact Us</h4>
+                    <!-- <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Spiritual Street, Puttaparthi</li>
+                        <li><i class="fas fa-phone-alt"></i> +91 9876543210</li>
+                        <li><i class="fas fa-envelope"></i> info@saidharmatours.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sat: 9:00 AM - 6:00 PM</li>
+                    </ul> -->
+                    <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> Opp: Gopuram Main Gate, Shop No-07, Puttaparthi - 515134, Sri Sathya Sai Dist., AP. </a></li>
+                    <li><a href="#"><i class="fas fa-phone-alt"></i> +91 9652399534</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> nareshdasariroyal@gmail.com</a></li>
+                    <li><a href="#"><i class="fas fa-clock"></i> Mon-Sun: 7AM - 11PM</a></li>
+                </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>The information on this website is for general purposes only. Prices, services, and availability may change without notice. We are not responsible for errors, delays, or issues caused by hotels, airlines, or other service providers. Please read our terms and conditions before using our services.</p>
+                <p style="margin-top: 15px;">&copy; 2023 Sai Dharma Tours and Travels. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Simple animation trigger
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add animation to elements when they come into view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            // Observe tour cards
+            document.querySelectorAll('.tour-card, .testimonial-card').forEach(card => {
+                observer.observe(card);
+            });
+            
+            // Back to top button functionality
+            const backToTopButton = document.querySelector('.back-to-top');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Add hover effect to tour cards
+            const tourCards = document.querySelectorAll('.tour-card');
+            tourCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-15px) rotateY(5deg)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0) rotateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

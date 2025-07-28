@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sai Dharma Tours & Travels - Premium Travel Services</title>
+    <!-- Add this inside your <head> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+        }
+
+        /* Hero Carousel Specific Styles */
+        .hero-carousel-container {
+            position: relative;
+            overflow: hidden;
+            height: 100vh; /* Full viewport height */
+            width: 100%;
+        }
+        .hero-carousel-wrapper {
+            display: flex;
+            height: 100%;
+            transition: transform 1s ease-in-out; /* Smooth slide transition */
+        }
+        .hero-slide {
+            min-width: 100%; /* Each slide takes full width */
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            flex-shrink: 0; /* Prevent slides from shrinking */
+        }
+        .hero-slide-overlay {
+            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for readability */
+            position: absolute;
+            inset: 0;
+        }
+        .hero-slide-content {
+            position: relative;
+            z-index: 10;
+            max-width: 4xl;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .hero-carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(249, 115, 22, 0.7); /* Orange with transparency */
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 9999px; /* Fully rounded */
+            cursor: pointer;
+            z-index: 20; /* Above overlay and content */
+            font-size: 1.5rem;
+            line-height: 1;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            outline: none;
+        }
+        .hero-carousel-button:hover {
+            background-color: rgba(234, 88, 12, 0.9); /* Darker orange on hover */
+            transform: translateY(-50%) scale(1.05);
+        }
+        .hero-carousel-button.prev {
+            left: 1rem;
+        }
+        .hero-carousel-button.next {
+            right: 1rem;
+        }
+
+        .section-heading {
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: #f97316;
+            border-radius: 9999px;
+        }
+        .card-hover-effect {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .button-hover-effect {
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .button-hover-effect:hover {
+            background-color: #ea580c;
+            transform: translateY(-2px);
+        }
+        .animate-fade-in {
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .slide-up-animation {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .slide-up-animation.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Styling for header icons carousel */
+        .header-icon-container {
+            position: relative;
+            width: 48px; /* Increased width for larger icons */
+            height: 48px; /* Increased height for larger icons */
+            margin-right: 0.75rem; /* Slightly more spacing */
+        }
+        .header-icon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Ensures the whole icon is visible */
+            transition: opacity 0.5s ease-in-out; /* Smooth fade effect */
+            opacity: 0; /* Hidden by default */
+            pointer-events: none; /* Make icons non-interactive when hidden */
+        }
+        .header-icon.active {
+            opacity: 1;
+            pointer-events: auto; /* Make active icon interactive */
+            animation: floatIcon 2s infinite ease-in-out; /* Apply floating animation */
+        }
+
+        /* Animation for the title text */
+        .animated-title {
+            display: inline-block; /* Allows transform */
+            animation: bounceText 4s infinite ease-in-out;
+        }
+
+        @keyframes bounceText {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); } /* Subtle up and down float */
+        }
+
+        /* Custom message box styles */
+        .message-box-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .message-box-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .message-box-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+        .message-box-overlay.visible .message-box-content {
+            transform: translateY(0);
+        }
+
+        /* Destination Card specific styles */
+        .destination-card {
+            position: relative;
+            overflow: hidden;
+            height: 300px; /* Fixed height for consistency */
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .destination-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .destination-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .destination-card:hover img {
+            transform: scale(1.05);
+        }
+        .destination-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 20px;
+            color: white;
+        }
+        .testimonial-card {
+            background: linear-gradient(145deg, #ffffff, #f0f4f8);
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .booking-form {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+        .social-icon {
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: translateY(-3px);
+            color: #f97316;
+        }
+        /* Styles for the "Why Choose Us" section */
+        .why-choose-card {
+            background-color: #ffffff;
+            border-radius: 0.75rem; /* rounded-lg */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
+            padding: 1.5rem; /* p-6 */
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .why-choose-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+        .why-choose-card .icon {
+            margin-bottom: 1rem;
+            display: inline-block;
+            color: #f97316; /* orange-500 */
+        }
+        .why-choose-card h3 {
+            font-weight: 600; /* font-semibold */
+            margin-bottom: 0.5rem;
+            color: #1e293b; /* slate-800 */
+        }
+        .why-choose-card p {
+            color: #475569; /* slate-600 */
+        }
+
+/* Enhanced Services Section */
+        .services-container {
+            position: relative;
+            padding: 4rem 0;
+            overflow: hidden;
+        }
+        
+        .service-card {
+            background: linear-gradient(145deg, #ffffff, #f9fafb);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            height: 100%;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 15px 35px rgba(249, 115, 22, 0.2);
+            z-index: 10;
+        }
+        
+        .service-image-container {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .service-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .service-card:hover .service-image {
+            transform: scale(1.1);
+        }
+        
+        .service-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            display: flex;
+            align-items: flex-end;
+            padding: 1rem;
+        }
+        
+        .service-title {
+            color: white;
+            font-weight: 700;
+            font-size: 1.4rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .service-content {
+            padding: 1.5rem;
+        }
+        
+        .service-description {
+            color: #4b5563;
+            margin-bottom: 1.5rem;
+            min-height: 80px;
+        }
+        
+        .service-learn-more {
+            display: inline-flex;
+            align-items: center;
+            color: #f97316;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .service-learn-more:hover {
+            color: #ea580c;
+            transform: translateX(5px);
+        }
+        
+        .service-learn-more i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .service-learn-more:hover i {
+            transform: translateX(3px);
+        }
+        
+        .service-corner {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-top: 60px solid #f97316;
+            border-left: 60px solid transparent;
+            z-index: 2;
+        }
+        
+        .service-icon {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            color: white;
+            font-size: 1.2rem;
+            z-index: 3;
+        }
+        
+        /* Book slide effect */
+        .service-slider {
+            position: relative;
+            padding: 3rem 0;
+        }
+        
+        .slider-track {
+            display: flex;
+            gap: 2rem;
+            padding: 2rem 0;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+        }
+        
+        .slider-track::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .slider-item {
+            scroll-snap-align: start;
+            flex: 0 0 320px;
+            min-width: 300px;
+            transition: transform 0.3s ease;
+        }
+        
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .slider-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #f97316;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .slider-btn:hover {
+            background: #ea580c;
+            transform: scale(1.1);
+        }
+        
+        .page-turn {
+            position: absolute;
+            top: 0;
+            right: -10px;
+            width: 30px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.1));
+            z-index: 5;
+            border-radius: 0 16px 16px 0;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        
+        .service-card:hover .page-turn {
+            opacity: 1;
+        }
+        
+        .services-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3rem;
+        }
+        
+        .services-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #f97316, #fbbf24);
+            border-radius: 2px;
+        }
+        
+        /* Floating animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+         
+        /* Updated animations for vehicles */
+        .logo-container {
+            position: relative;
+            display: inline-block;
+            padding-left: 0px;
+            font-size: 35px;
+        }
+        .vehicle-icon {
+            position: absolute;
+            z-index: 10;
+            transition: all 0.5s ease-out;
+            object-fit: contain;
+        }
+        .car-icon {
+            width: 80px;
+            top: -8px;
+            left: -25px;
+            animation: carDrive 8s linear infinite;
+        }
+        .bus-icon {
+            width: 50px;
+            top: -15px;
+            left: -30px;
+            animation: busDrive 12s linear infinite 2s;
+        }
+        .flight-icon {
+            width: 28px;
+            top: -10px;
+            left: -35px;
+            animation: flightMove 10s linear infinite 1s;
+        }
+        
+        @keyframes carDrive {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            10% { transform: translateX(10px) translateY(3px); }
+            20% { transform: translateX(25px) translateY(-2px); }
+            30% { transform: translateX(40px) translateY(1px); }
+            40% { transform: translateX(55px) translateY(-3px); }
+            50% { transform: translateX(70px) translateY(2px); }
+            60% { transform: translateX(85px) translateY(-1px); }
+            70% { transform: translateX(100px) translateY(3px); }
+            80% { transform: translateX(115px) translateY(-2px); }
+            90% { transform: translateX(130px) translateY(1px); }
+        }
+        
+        @keyframes busDrive {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(40px) translateY(-4px); }
+            50% { transform: translateX(80px) translateY(2px); }
+            75% { transform: translateX(120px) translateY(-3px); }
+        }
+        
+        @keyframes flightMove {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            20% { transform: translateX(20px) translateY(-5px); }
+            40% { transform: translateX(40px) translateY(3px); }
+            60% { transform: translateX(60px) translateY(-4px); }
+            80% { transform: translateX(80px) translateY(2px); }
+        }
+              /* Animation for the title text */
+        .animated-title {
+            display: inline-block; /* Allows transform */
+            animation: bounceText 4s infinite ease-in-out;
+        }
+
+        @keyframes bounceText {
+            0%, 100% { transform: translateY(50%); }
+            50% { transform: translateY(-3px); }
+        }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(50%); }
+            50% { transform: translateY(-5px); } /* Subtle up and down float */
+        }
+
+
+
+        
+    </style>
+</head>
+<body>
+
+  <!-- Header & Navigation -->
+    <header class="bg-white shadow-sm py-4 fixed w-full z-50">
+        <nav class="container mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8">
+            <a href="index8.html" class="text-2xl font-bold text-orange-500 relative">
+                <div class="logo-container">
+                    <!-- Vehicle Icons as images -->
+                    <img src="https://cdn-icons-png.flaticon.com/512/55/55283.png" alt="Car" class="vehicle-icon car-icon">
+                    <img src="https://cdn-icons-png.flaticon.com/512/744/744465.png" alt="Bus" class="vehicle-icon bus-icon">
+                    <!-- <img src="https://cdn-icons-png.flaticon.com/512/1820/1820805.png" alt="Flight" class="vehicle-icon flight-icon"> -->
+                    
+                <span class="animated-title">Sai Dharma Tours & Travels</span>
+                </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="index8.html" class="text-gray-600 hover:text-orange-500 font-medium transition duration-300">Home</a>
+                <a href="about3.html" class="text-gray-600 hover:text-orange-500 font-medium transition duration-300">About Us</a>
+                <a href="services2.html" class="text-gray-600 hover:text-orange-500 font-medium transition duration-300">Services</a>
+                <a href="gallery.html" class="text-gray-600 hover:text-orange-500 font-medium transition duration-300">Gallery</a>
+                <a href="contact.html" class="text-gray-600 hover:text-orange-500 font-medium transition duration-300">Contact</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 hover:text-orange-500 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-2 shadow-md">
+            <a href="#home" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Home</a>
+            <a href="#about-us" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">About Us</a>
+            <a href="#services" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Services</a>
+            <a href="#gallery" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Gallery</a>
+            <a href="#contact" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Contact</a>
+        </div>
+    </header>
+<!-- <a href="https://wa.me/918247853622" 
+   target="_blank" 
+   class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-3 rounded-full shadow-lg z-50">
+   <i class="fab fa-whatsapp fa-lg"></i>
+</a> -->
+<!-- Floating WhatsApp and Instagram Icons -->
+<div class="fixed bottom-6 right-6 flex flex-col items-end space-y-3 z-50">
+
+  <!-- WhatsApp Button -->
+  <a href="https://wa.me/918247853622" target="_blank"
+     class="bg-green-500 hover:bg-green-600 text-white p-3 rounded-full shadow-lg">
+    <i class="fab fa-whatsapp fa-lg"></i>
+  </a>
+
+  <!-- Instagram Button -->
+  <a href="https://www.instagram.com/YOUR_USERNAME" target="_blank"
+     class="bg-pink-500 hover:bg-pink-600 text-white p-3 rounded-full shadow-lg">
+    <i class="fab fa-instagram fa-lg"></i>
+  </a>
+
+</div>
+
+    <main class="pt-16">
+        <!-- Hero Section - Now a Carousel -->
+        <section id="home" class="hero-carousel-container animate-fade-in">
+            <div class="hero-carousel-wrapper" id="hero-carousel-wrapper">
+                <!-- Slide 1 -->
+                <div class="hero-slide" style="background-image: url('https://wallpapercave.com/wp/wp5417084.jpg');">
+                    <div class="hero-slide-overlay"></div>
+                    <div class="hero-slide-content">
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 drop-shadow-lg">
+                            Collect Movements, Not things.
+                        </h1>
+                        <p class="text-lg sm:text-xl mb-8 drop-shadow-md">
+                            Let's join with Sai Dharma Travels.
+                        </p>
+                        <a href="#contact" class="bg-orange-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-orange-600 transition duration-300 button-hover-effect">
+                            Contact Today
+                        </a>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&q=80');">
+                    <div class="hero-slide-overlay"></div>
+                    <div class="hero-slide-content">
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 drop-shadow-lg">
+                            Your Adventure Awaits
+                        </h1>
+                        <p class="text-lg sm:text-xl mb-8 drop-shadow-md">
+                            Unforgettable journeys tailored just for you.
+                        </p>
+                        <a href="#services" class="bg-orange-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-orange-600 transition duration-300 button-hover-effect">
+                            View Our Packages
+                        </a>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&q=80');">
+                    <div class="hero-slide-overlay"></div>
+                    <div class="hero-slide-content">
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 drop-shadow-lg">
+                            Experience Cultural Immersion
+                        </h1>
+                        <p class="text-lg sm:text-xl mb-8 drop-shadow-md">
+                            Explore rich traditions and vibrant local life.
+                        </p>
+                        <a href="#gallery" class="bg-orange-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-orange-600 transition duration-300 button-hover-effect">
+                            See Our Gallery
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carousel Navigation Buttons -->
+            <button class="hero-carousel-button prev" id="hero-prev-slide">&#10094;</button>
+            <button class="hero-carousel-button next" id="hero-next-slide">&#10095;</button>
+        </section>
+
+        <!-- Welcome/Brief Intro Section -->
+        <section id="about-us" class="py-16 bg-white px-4 sm:px-6 lg:px-8">
+            <div class="container mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-10 section-heading text-gray-800 slide-up-animation">Welcome to Sai Dharma Tours & Travels</h2>
+                <div class="max-w-3xl mx-auto text-lg text-gray-600 leading-relaxed slide-up-animation">
+                    <p class="mb-6">
+                        At Sai Dharma Tours & Travels, we believe every journey is a story waiting to be told. We are passionate about creating unique and enriching travel experiences that cater to your every desire. Whether you're seeking a spiritual retreat, an adventurous expedition, or a relaxing family vacation, our dedicated team is here to make your travel dreams a reality.
+                    </p>
+                    <p>
+                        With a commitment to excellence and customer satisfaction, we offer a wide range of services including domestic and international tours, flight and hotel bookings, visa assistance, and customized travel packages. Let us take care of the details, so you can focus on making memories.
+                    </p>
+                    <a href="#about-us" class="inline-block mt-8 bg-gray-700 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:bg-gray-800 transition duration-300 button-hover-effect">
+                        Learn More About Us
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Our Services Section -->
+        <section id="services" class="py-16 bg-slate-50 px-4 sm:px-6 lg:px-8">
+            <div class="container mx-auto">
+                <h2 class="text-3xl font-bold mb-12 text-center section-heading text-gray-800 slide-up-animation">Our Services</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Service 1: Car Rentals & Taxi -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover-effect slide-up-animation">
+                        <div class="p-6">
+                            <div class="flex justify-center mb-4">
+                                <img src="images/taxi.jpeg" alt="Car Rentals Icon" class="w-100 h-100 object-contain">
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 text-gray-800">Car Rentals & Taxi</h3>
+                            <p class="text-gray-600 text-sm">
+                                Explore destinations at your own pace with our wide selection of rental cars and chauffeur services.
+                            </p>
+                            <div class="mt-4">
+                                <a href="#contact" class="text-orange-500 font-medium hover:underline">Know More →</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 2: Bus & Flight Ticket Booking -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover-effect slide-up-animation">
+                        <div class="p-6">
+                            <div class="flex justify-center mb-4">
+                                <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=128&h=128&q=80" alt="Bus & Flight Ticket Icon" class="w-100 h-100 object-contain">
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 text-gray-800">Bus & Flight Ticket Booking</h3>
+                            <p class="text-gray-600 text-sm">
+                                Find the best deals on domestic and international flights and comfortable bus travel.
+                            </p>
+                            <div class="mt-4">
+                                <a href="#contact" class="text-orange-500 font-medium hover:underline">Know More →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 3: Hotel Bookings -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover-effect slide-up-animation">
+                        <div class="p-6">
+                            <div class="flex justify-center mb-4">
+                                <img src="images/hotel.jpeg" alt="Hotel Bookings Icon" class="w-100 h-100 object-contain">
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 text-gray-800">Hotel Bookings</h3>
+                            <p class="text-gray-600 text-sm">
+                                Secure comfortable and affordable accommodations for your journey.
+                            </p>
+                            <div class="mt-4">
+                                <a href="#contact" class="text-orange-500 font-medium hover:underline">Contact Us →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 4: South India Tour Packages -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover-effect slide-up-animation">
+                        <div class="p-6">
+                            <div class="flex justify-center mb-4">
+                                <img src="images/i1.png" alt="South India Tour Packages Icon" class="w-100 h-100 object-contain">
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 text-gray-800">South India Tour Packages</h3>
+                            <p class="text-gray-600 text-sm">
+                                Discover the rich culture and stunning landscapes of South India with our curated tours.
+                            </p>
+                            <div class="mt-4">
+                                <a href="#contact" class="text-orange-500 font-medium hover:underline">Know More →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+   <!-- Our Services Section -->
+        <section id="services" class="py-16 bg-slate-50 px-4">
+            <div class="container mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 services-title inline-block">
+                        Our Premium Services
+                    </h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto mt-4">
+                        Discover our range of travel services designed to make your journey unforgettable
+                    </p>
+                </div>
+                
+                <!-- Service Cards with Book/Slide Effect -->
+                <div class="service-slider">
+                    <div class="slider-track">
+                        <!-- Service 1: Car Rentals & Taxi -->
+                        <div class="slider-item floating">
+                            <div class="service-card h-full">
+                                <div class="service-corner"></div>
+                                <i class="fas fa-car service-icon"></i>
+                                <div class="service-image-container">
+                                    <img src="images/taxi.jpeg" 
+                                         alt="Car Rentals" class="service-image">
+                                    <div class="service-overlay">
+                                        <h3 class="service-title">Car Rentals & Taxi</h3>
+                                    </div>
+                                </div>
+                                <div class="service-content">
+                                    <p class="service-description">
+                                        Explore destinations at your own pace with our wide selection of rental cars and chauffeur services. Choose from economy to luxury vehicles.
+                                    </p>
+                                    <a href="#contact" class="service-learn-more">
+                                        Know More <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                                <div class="page-turn"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 2: Bus & Flight Ticket Booking -->
+                        <div class="slider-item floating" style="animation-delay: 0.2s;">
+                            <div class="service-card h-full">
+                                <div class="service-corner"></div>
+                                <i class="fas fa-bus service-icon"></i>
+                                <div class="service-image-container">
+                                    <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=500&q=80" 
+                                         alt="Bus & Flight Tickets" class="service-image">
+                                    <div class="service-overlay">
+                                        <h3 class="service-title">Bus & Flight Ticket Booking</h3>
+                                    </div>
+                                </div>
+                                <div class="service-content">
+                                    <p class="service-description">
+                                        Find the best deals on domestic and international flights and comfortable bus travel. We offer competitive prices and reliable service.
+                                    </p>
+                                    <a href="#contact" class="service-learn-more">
+                                        Know More <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                                <div class="page-turn"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 3: Hotel Bookings -->
+                        <div class="slider-item floating" style="animation-delay: 0.4s;">
+                            <div class="service-card h-full">
+                                <div class="service-corner"></div>
+                                <i class="fas fa-hotel service-icon"></i>
+                                <div class="service-image-container">
+                                    <img src="images/hotel.jpeg" 
+                                         alt="Hotel Bookings" class="service-image">
+                                    <div class="service-overlay">
+                                        <h3 class="service-title">Hotel Bookings</h3>
+                                    </div>
+                                </div>
+                                <div class="service-content">
+                                    <p class="service-description">
+                                        Secure comfortable and affordable accommodations for your journey. We partner with top hotels to bring you the best options.
+                                    </p>
+                                    <a href="#contact" class="service-learn-more">
+                                        Contact Us <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                                <div class="page-turn"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 4: South India Tour Packages -->
+                        <div class="slider-item floating" style="animation-delay: 0.6s;">
+                            <div class="service-card h-full">
+                                <div class="service-corner"></div>
+                                <i class="fas fa-map-marked-alt service-icon"></i>
+                                <div class="service-image-container">
+                                    <img src="images/i1.png" 
+                                         alt="South India Tours" class="service-image">
+                                    <div class="service-overlay">
+                                        <h3 class="service-title">South India Tour Packages</h3>
+                                    </div>
+                                </div>
+                                <div class="service-content">
+                                    <p class="service-description">
+                                        Discover the rich culture and stunning landscapes of South India with our curated tours. Experience the best of the region.
+                                    </p>
+                                    <a href="#contact" class="service-learn-more">
+                                        Know More <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                                <div class="page-turn"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 5: Guided Tours -->
+                        <div class="slider-item floating" style="animation-delay: 0.8s;">
+                            <div class="service-card h-full">
+                                <div class="service-corner"></div>
+                                <i class="fas fa-hiking service-icon"></i>
+                                <div class="service-image-container">
+                                    <img src="https://images.unsplash.com/photo-1503220317375-aaad61436b1b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=500&q=80" 
+                                         alt="Guided Tours" class="service-image">
+                                    <div class="service-overlay">
+                                        <h3 class="service-title">Guided Tours</h3>
+                                    </div>
+                                </div>
+                                <div class="service-content">
+                                    <p class="service-description">
+                                        Experience destinations like never before with our expert local guides. Gain insights and create unforgettable memories.
+                                    </p>
+                                    <a href="#contact" class="service-learn-more">
+                                        Explore Tours <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                                <div class="page-turn"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-nav">
+                        <button class="slider-btn" id="slider-prev">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="slider-btn" id="slider-next">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    
+
+        <!-- Why Choose Sai Dharma Tours & Travels? Section -->
+        <section class="py-16 bg-white px-4 sm:px-6 lg:px-8">
+            <div class="container mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-12 section-heading text-gray-800 slide-up-animation">Why Choose Sai Dharma Tours & Travels?</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Reason 1 -->
+                    <div class="why-choose-card slide-up-animation">
+                        <div class="icon">
+                            <svg class="w-12 h-12 mx-auto" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        </div>
+                        <h3 class="text-lg">Well-Maintained Vehicles</h3>
+                        <p class="text-sm">Our fleet is regularly serviced and maintained to ensure a safe and smooth journey for you.</p>
+                    </div>
+                    
+                    <!-- Reason 2 -->
+                    <div class="why-choose-card slide-up-animation">
+                        <div class="icon">
+                            <svg class="w-12 h-12 mx-auto" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        </div>
+                        <h3 class="text-lg">Affordable Car Rentals and Taxi Services</h3>
+                        <p class="text-sm">Enjoy competitive pricing without compromising on quality or convenience.</p>
+                    </div>
+
+                    <!-- Reason 3 -->
+                    <div class="why-choose-card slide-up-animation">
+                        <div class="icon">
+                            <svg class="w-12 h-12 mx-auto" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        </div>
+                        <h3 class="text-lg">Experienced Drivers</h3>
+                        <p class="text-sm">Travel with confidence, guided by drivers who have over 15 years of professional experience.</p>
+                    </div>
+
+                    <!-- Reason 4 -->
+                    <div class="why-choose-card slide-up-animation">
+                        <div class="icon">
+                            <svg class="w-12 h-12 mx-auto" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        </div>
+                        <h3 class="text-lg">Transparent Pricing</h3>
+                        <p class="text-sm">No hidden costs—our pricing is upfront and honest, ensuring you get the best value for your money.</p>
+                    </div>
+
+                    <!-- Reason 5 -->
+                    <div class="why-choose-card slide-up-animation">
+                        <div class="icon">
+                            <svg class="w-12 h-12 mx-auto" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        </div>
+                        <h3 class="text-lg">Customized Tour Packages</h3>
+                        <p class="text-sm">Whether it's a family vacation or a solo adventure, we create tailor-made tour packages to suit your needs.</p>
+                    </div>
+
+                    <!-- Reason 6 -->
+                    <div class="why-choose-card slide-up-animation">
+                        <div class="icon">
+                            <svg class="w-12 h-12 mx-auto" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        </div>
+                        <h3 class="text-lg">One-Stop Travel Solution</h3>
+                        <p class="text-sm">From transport to accommodations and sightseeing, we offer a complete travel solution under one roof.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Popular Destinations -->
+        <section id="gallery" class="py-16 bg-slate-50 px-4 sm:px-6 lg:px-8">
+            <div class="container mx-auto">
+                <h2 class="text-3xl font-bold mb-12 text-center section-heading text-gray-800 slide-up-animation">Popular Destinations</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Destination 1 -->
+                    <div class="destination-card slide-up-animation">
+                        <img src="images/tirupathi.jpg" alt="Tirupati" class="w-full h-full object-cover">
+                        <div class="destination-info">
+                            <h3 class="text-xl font-bold">Tirupati</h3>
+                            <p class="text-sm mt-1">Spiritual Pilgrimage</p>
+                            <div class="flex items-center mt-2">
+                                <span class="text-orange-500 mr-1">★</span>
+                                <span>4.8 (1.2K reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Destination 2 -->
+                    <div class="destination-card slide-up-animation">
+                        <img src="images/shridi.webp" alt="Shirdi" class="w-full h-full object-cover">
+                        <div class="destination-info">
+                            <h3 class="text-xl font-bold">Shirdi</h3>
+                            <p class="text-sm mt-1">Sai Baba Darshan</p>
+                            <div class="flex items-center mt-2">
+                                <span class="text-orange-500 mr-1">★</span>
+                                <span>4.9 (980 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Destination 3 -->
+                    <div class="destination-card slide-up-animation">
+                        <img src="images/mysore.jpg" alt="Mysore" class="w-full h-full object-cover">
+                        <div class="destination-info">
+                            <h3 class="text-xl font-bold">Mysore</h3>
+                            <p class="text-sm mt-1">Cultural Heritage</p>
+                            <div class="flex items-center mt-2">
+                                <span class="text-orange-500 mr-1">★</span>
+                                <span>4.7 (850 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Destination 4 -->
+                    <div class="destination-card slide-up-animation">
+                        <img src="images/bali.jpg" alt="Mysore" class="w-full h-full object-cover">
+                        <div class="destination-info">
+                            <h3 class="text-xl font-bold">Bali</h3>
+                            <p class="text-sm mt-1"> Vibrant Cultural</p>
+                            <div class="flex items-center mt-2">
+                                <span class="text-orange-500 mr-1">★</span>
+                                <span>4.7 (850 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Destination 5 -->
+                    <div class="destination-card slide-up-animation">
+                        <img src="images/swis.avif" alt="Mysore" class="w-full h-full object-cover">
+                        <div class="destination-info">
+                            <h3 class="text-xl font-bold">Switzerland</h3>
+                            <p class="text-sm mt-1">Vibarant Cultural</p>
+                            <div class="flex items-center mt-2">
+                                <span class="text-orange-500 mr-1">★</span>
+                                <span>4.7 (850 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Destination 6 -->
+                    <div class="destination-card slide-up-animation">
+                        <img src="images/gova.jpg" alt="Mysore" class="w-full h-full object-cover">
+                        <div class="destination-info">
+                            <h3 class="text-xl font-bold">Goa</h3>
+                            <p class="text-sm mt-1"> Vibarant Cultural</p>
+                            <div class="flex items-center mt-2">
+                                <span class="text-orange-500 mr-1">★</span>
+                                <span>4.7 (850 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                      <!-- Destination 7 -->
+                    <div class="destination-card slide-up-animation">
+                        <img src="images/kerala.jpeg" alt="Mysore" class="w-full h-full object-cover">
+                        <div class="destination-info">
+                            <h3 class="text-xl font-bold">Kerala</h3>
+                            <p class="text-sm mt-1">Cultural Heritage</p>
+                            <div class="flex items-center mt-2">
+                                <span class="text-orange-500 mr-1">★</span>
+                                <span>4.7 (850 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Destination 8 -->
+                    <div class="destination-card slide-up-animation">
+                        <img src="images/badri.jpeg" alt="Mysore" class="w-full h-full object-cover">
+                        <div class="destination-info">
+                            <h3 class="text-xl font-bold">Badrinath</h3>
+                            <p class="text-sm mt-1">Cultural Heritage</p>
+                            <div class="flex items-center mt-2">
+                                <span class="text-orange-500 mr-1">★</span>
+                                <span>4.7 (850 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+        
+        <!-- Testimonials -->
+        <section class="py-16 bg-white px-4 sm:px-6 lg:px-8">
+            <div class="container mx-auto">
+                <h2 class="text-3xl font-bold mb-12 text-center section-heading text-gray-800 slide-up-animation">What Our Travelers Say</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card p-6 slide-up-animation">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Customer" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Rajesh Kumar</h4>
+                                <div class="flex text-orange-500">
+                                    <span>★</span>
+                                    <span>★</span>
+                                    <span>★</span>
+                                    <span>★</span>
+                                    <span>★</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 italic">
+                            "The pilgrimage tour to Tirupati organized by Sai Dharma Tours & Travels was flawless. From comfortable bus rides to well-organized darshan arrangements, everything was perfect. Highly recommended for spiritual journeys!"
+                        </p>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card p-6 slide-up-animation">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Customer" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Priya Sharma</h4>
+                                <div class="flex text-orange-500">
+                                    <span>★</span>
+                                    <span>★</span>
+                                    <span>★</span>
+                                    <span>★</span>
+                                    <span>★</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 italic">
+                            "Our family trip to Shirdi with Sai Dharma Tours & Travels was exceptional. The guides were knowledgeable, the accommodation was comfortable, and the entire experience was spiritually uplifting. Will definitely travel with them again."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Quote Section -->
+        <section class="py-16 bg-slate-100 px-4 sm:px-6 lg:px-8 text-center">
+            <div class="container mx-auto max-w-3xl">
+                <blockquote class="text-xl md:text-2xl font-medium text-gray-700 italic leading-relaxed slide-up-animation">
+                    “Every action of yours at the present time is bound to have a reaction, resound and reflection in the future”
+                    <footer class="mt-4 text-lg font-semibold text-orange-600">— Sri Sathya Sai Baba</footer>
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- Disclaimer Section -->
+        <section class="py-10 bg-gray-100 px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500">
+            <div class="container mx-auto max-w-4xl">
+                <p>The information on this website is for general purposes only. Prices, services, and availability may change without notice. We are not responsible for errors, delays, or issues caused by hotels, airlines, or other service providers. Please read our terms and conditions before using our services.</p>
+            </div>
+        </section>
+
+        <!-- Booking Form -->
+        <section id="contact" class="py-16 px-4 sm:px-6 lg:px-8">
+            <div class="container mx-auto max-w-4xl">
+                <div class="booking-form p-8 slide-up-animation">
+                    <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">Plan Your Journey</h2>
+                    <form id="booking-form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-gray-700 mb-2" for="name">Full Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Enter your name" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2" for="email">Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Enter your email" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2" for="phone">Phone</label>
+                            <input type="tel" id="phone" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Enter your phone">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2" for="service">Service Type</label>
+                            <select id="service" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                <option value="">Select a service</option>
+                                <option value="flight">Flight Booking</option>
+                                <option value="bus">Bus Reservation</option>
+                                <option value="car">Car Rental</option>
+                                <option value="tour">Tour Package</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2" for="origin">Origin</label>
+                            <input type="text" id="origin" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="From">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2" for="destination">Destination</label>
+                            <input type="text" id="destination" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="To">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-gray-700 mb-2" for="message">Special Requirements</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Tell us about your travel needs"></textarea>
+                        </div>
+                        <div class="md:col-span-2 text-center">
+                            <button type="submit" class="bg-orange-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-orange-600 transition duration-300 button-hover-effect">
+                                Request a Quote
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 px-4 sm:px-6 lg:px-8">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-xl font-bold mb-4 text-orange-500">Sai Dharma Tours & Travels</h3>
+                <p class="text-gray-400 mb-4">
+                    Your trusted partner for all your travel needs. Providing exceptional service since 2010.
+                </p>
+                  <div class="flex space-x-4">
+                        <a href="#" class="bg-gray-700 hover:bg-orange-500 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="bg-gray-700 hover:bg-orange-500 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="bg-gray-700 hover:bg-orange-500 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="bg-gray-700 hover:bg-orange-500 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+            </div>
+            
+            <div>
+                <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="#home" class="text-gray-400 hover:text-white transition duration-300">Home</a></li>
+                    <li><a href="#about-us" class="text-gray-400 hover:text-white transition duration-300">About Us</a></li>
+                    <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Services</a></li>
+                    <li><a href="#gallery" class="text-gray-400 hover:text-white transition duration-300">Gallery</a></li>
+                    <li><a href="#contact" class="text-gray-400 hover:text-white transition duration-300">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="text-lg font-bold mb-4">Services</h3>
+                <ul class="space-y-2">
+                    <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Car Rentals & Taxi</a></li>
+                    <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Bus & Flight Ticket Booking</a></li>
+                    <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Hotel Bookings</a></li>
+                    <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">South India Tour Packages</a></li>
+                    <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Foreign Exchange</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="text-lg font-bold mb-4">Tours & Packages</h3>
+                <ul class="space-y-2">
+                    <li><a href="#gallery" class="text-gray-400 hover:text-white transition duration-300">Puttaparthi</a></li>
+                    <li><a href="#gallery" class="text-gray-400 hover:text-white transition duration-300">Andhra Pradesh</a></li>
+                    <li><a href="#gallery" class="text-gray-400 hover:text-white transition duration-300">Karnataka</a></li>
+                    <!-- Add more tour packages as needed -->
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+                <ul class="space-y-3 text-gray-400">
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 mr-2 mt-0.5 text-orange-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Opp: Gopuram Main Gate, Shop No-07, Puttaparthi - 515134, Sri Sathya Sai Dist., AP.</span>
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-orange-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+                        </svg>
+                        <span>+91 9652399534</span>
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-orange-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                        </svg>
+                        <span>nareshdasariroyal@gmail.com</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="container mx-auto text-center mt-10 pt-6 border-t border-gray-700">
+            <p>&copy; 2023 Sai Dharma Tours & Travels. All rights reserved.</p>
+            <div class="flex justify-center space-x-4 mt-4">
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300">Privacy Policy</a>
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Message Box HTML -->
+    <div id="custom-message-box" class="message-box-overlay">
+        <div class="message-box-content">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Demo Message</h3>
+            <p class="text-gray-600 mb-6">This is a demo only.</p>
+            <button id="close-message-box" class="bg-orange-500 text-white font-bold py-2 px-6 rounded-full hover:bg-orange-600 transition duration-300">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.slide-up-animation').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Custom Message Box Logic
+        const bookingForm = document.getElementById('booking-form');
+        const messageBox = document.getElementById('custom-message-box');
+        const closeMessageBoxButton = document.getElementById('close-message-box');
+
+        if (bookingForm) {
+            bookingForm.addEventListener('submit', function(e) {
+                e.preventDefault(); // Prevent default form submission
+
+                // Show the custom message box
+                messageBox.classList.add('visible');
+                
+                this.reset(); // Reset the form fields
+            });
+        }
+
+        if (closeMessageBoxButton) {
+            closeMessageBoxButton.addEventListener('click', () => {
+                messageBox.classList.remove('visible'); // Hide the message box
+            });
+        }
+
+        // Hero Carousel Logic
+        const heroCarouselWrapper = document.getElementById('hero-carousel-wrapper');
+        const heroSlides = document.querySelectorAll('.hero-slide');
+        const heroPrevButton = document.getElementById('hero-prev-slide');
+        const heroNextButton = document.getElementById('hero-next-slide');
+        let heroCurrentIndex = 0;
+        const heroTotalSlides = heroSlides.length;
+        let heroAutoSlideInterval;
+
+        // Function to show a specific hero slide
+        function showHeroSlide(index) {
+            if (index >= heroTotalSlides) {
+                heroCurrentIndex = 0;
+            } else if (index < 0) {
+                heroCurrentIndex = heroTotalSlides - 1;
+            } else {
+                heroCurrentIndex = index;
+            }
+            const offset = -heroCurrentIndex * 100;
+            heroCarouselWrapper.style.transform = `translateX(${offset}%)`;
+        }
+
+        // Function to go to the next hero slide
+        function nextHeroSlide() {
+            showHeroSlide(heroCurrentIndex + 1);
+        }
+
+        // Start automatic hero sliding
+        function startHeroAutoSlide() {
+            heroAutoSlideInterval = setInterval(nextHeroSlide, 7000); // Change image every 7 seconds
+        }
+
+        // Stop automatic hero sliding
+        function stopHeroAutoSlide() {
+            clearInterval(heroAutoSlideInterval);
+        }
+
+        // Event listeners for hero navigation buttons
+        if (heroPrevButton) {
+            heroPrevButton.addEventListener('click', () => {
+                stopHeroAutoSlide();
+                prevHeroSlide();
+                startHeroAutoSlide();
+            });
+        }
+        if (heroNextButton) {
+            heroNextButton.addEventListener('click', () => {
+                stopHeroAutoSlide();
+                nextHeroSlide();
+                startHeroAutoSlide();
+            });
+        }
+
+        // Pause auto-slide on hover over the hero carousel
+        if (heroCarouselWrapper && heroCarouselWrapper.parentElement) {
+            heroCarouselWrapper.parentElement.addEventListener('mouseenter', stopHeroAutoSlide);
+            heroCarouselWrapper.parentElement.addEventListener('mouseleave', startHeroAutoSlide);
+        }
+
+        // Initialize hero carousel on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (heroTotalSlides > 0) {
+                showHeroSlide(0); // Show the first slide
+                startHeroAutoSlide(); // Start the automatic slideshow
+            }
+        });
+
+
+        // Header Icons Carousel Logic
+        const headerIconsContainer = document.getElementById('header-icons-carousel');
+        const headerIcons = headerIconsContainer ? headerIconsContainer.querySelectorAll('.header-icon') : [];
+        const headerTitle = document.querySelector('.animated-title'); // Select the title span
+        let currentHeaderIconIndex = 0;
+        const headerIconIntervalTime = 3000; // Change icon every 3 seconds
+        let headerIconInterval;
+
+        function showNextHeaderIcon() {
+            if (headerIcons.length === 0) return;
+
+            // Hide current icon
+            if (headerIcons[currentHeaderIconIndex]) {
+                headerIcons[currentHeaderIconIndex].classList.remove('active');
+            }
+
+            // Move to next icon
+            currentHeaderIconIndex = (currentHeaderIconIndex + 1) % headerIcons.length;
+
+            // Show new current icon
+            if (headerIcons[currentHeaderIconIndex]) {
+                headerIcons[currentHeaderIconIndex].classList.add('active');
+            }
+        }
+
+        // Start header icon rotation and ensure title animation is applied
+        document.addEventListener('DOMContentLoaded', () => {
+            if (headerIcons.length > 0) {
+                headerIcons[0].classList.add('active'); // Show the first icon initially
+                headerIconInterval = setInterval(showNextHeaderIcon, headerIconIntervalTime);
+            }
+            // Ensure the animated-title class is applied to the span
+            if (headerTitle && !headerTitle.classList.contains('animated-title')) {
+                headerTitle.classList.add('animated-title');
+            }
+        });
+
+         // Service slider functionality
+        const sliderTrack = document.querySelector('.slider-track');
+        const sliderPrev = document.getElementById('slider-prev');
+        const sliderNext = document.getElementById('slider-next');
+        
+        if (sliderNext) {
+            sliderNext.addEventListener('click', () => {
+                sliderTrack.scrollBy({ left: 350, behavior: 'smooth' });
+            });
+        }
+        
+        if (sliderPrev) {
+            sliderPrev.addEventListener('click', () => {
+                sliderTrack.scrollBy({ left: -350, behavior: 'smooth' });
+            });
+        }
+
+
+         document.addEventListener('DOMContentLoaded', function () {
+    const messageBox = document.getElementById('custom-message-box');
+    const closeMessageBoxButton = document.getElementById('close-message-box');
+
+    // Show popup on page load
+    if (messageBox) {
+      messageBox.classList.add('visible');
+    }
+
+    if (closeMessageBoxButton) {
+      closeMessageBoxButton.addEventListener('click', () => {
+        messageBox.classList.remove('visible');
+      });
+    }
+  });
+    </script>
+</body>
+</html>

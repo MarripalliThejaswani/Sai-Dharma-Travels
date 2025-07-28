@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sai Dharma Tours & Travels - About Us</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* Base Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #334155;
+            scroll-behavior: smooth;
+        }
+
+        /* Section Heading */
+        .section-heading {
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: #f97316;
+            border-radius: 9999px;
+        }
+
+        /* Animations and Transitions */
+        .animate-fade-in {
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .slide-up-animation {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .slide-up-animation.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Card Hover Effect */
+        .card-hover-effect {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Button Hover Effect */
+        .button-hover-effect {
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .button-hover-effect:hover {
+            background-color: #ea580c;
+            transform: translateY(-2px);
+        }
+
+        /* About Hero Section */
+        .about-hero-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/photo-1431274172761-fca41d930114.avif');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+        .about-hero-content {
+            z-index: 10;
+            max-width: 4xl;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .about-hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            animation: slideInLeft 1s ease-out forwards;
+        }
+        .about-hero-content p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+            animation: slideInRight 1s ease-out forwards;
+            animation-delay: 0.3s;
+            opacity: 0;
+        }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Mission/Vision Card Styles */
+        .mission-vision-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .mission-vision-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #f97316, #ea580c);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .mission-vision-card:hover::before {
+            transform: scaleX(1);
+        }
+        .mission-vision-card .icon {
+            font-size: 3rem;
+            color: #f97316;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        .mission-vision-card:hover .icon {
+            transform: translateY(-5px);
+        }
+        .mission-vision-card h3 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+        .mission-vision-card p {
+            color: #475569;
+            line-height: 1.7;
+        }
+        
+        /* Why Choose Us Section Cards */
+        .why-choose-card-new {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            text-align: center;
+            padding: 40px 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .why-choose-card-new:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .why-choose-card-new .icon-container {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            transition: transform 0.3s ease;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+
+        .why-choose-card-new:hover .icon-container {
+            transform: scale(1.05);
+        }
+
+        .why-choose-card-new .icon-container img {
+            width: 90%;
+            height: 90%;
+            object-fit: contain;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        .why-choose-card-new:hover .icon-container img {
+            transform: scale(1.1);
+        }
+
+        .why-choose-card-new h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #0a2c4e;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .why-choose-card-new p {
+            color: #475569;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .why-choose-card-new::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.05) 0%, rgba(234, 88, 12, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .why-choose-card-new:hover::after {
+            opacity: 1;
+        }
+
+        /* Section Title for Features */
+        .features .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .features .section-title h2 {
+            font-family: 'Inter', sans-serif;
+            font-size: 2.5rem;
+            color: #0a2c4e;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .features .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #ff7e5f;
+        }
+
+        .features .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 15px auto 0;
+            font-size: 1.1rem;
+        }
+
+        /* Hidden Gems Card Styles */
+        .gem-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            text-align: center;
+            height: 100%;
+        }
+        .gem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .gem-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            transition: transform 0.5s ease;
+        }
+        .gem-card:hover img {
+            transform: scale(1.05);
+        }
+        .gem-card .gem-info {
+            padding: 1.5rem;
+        }
+        .gem-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+        .gem-card p {
+            color: #475569;
+            font-size: 0.95rem;
+        }
+        
+        .gem-card .learn-more {
+            display: inline-block;
+            margin-top: 15px;
+            color: #f97316;
+            font-weight: 600;
+            text-decoration: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .gem-card:hover .learn-more {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Proprietor Message Section */
+        .proprietor-message {
+            background: linear-gradient(135deg, #fff8f1 0%, #ffefe6 100%);
+            padding: 4rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .proprietor-message::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(249,115,22,0.1) 0%, rgba(249,115,22,0) 70%);
+            z-index: 0;
+        }
+        .proprietor-message blockquote {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: #334155;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .proprietor-message blockquote::before {
+            content: "“";
+            font-size: 4rem;
+            color: #f97316;
+            position: absolute;
+            left: -20px;
+            top: -20px;
+            opacity: 0.3;
+            z-index: -1;
+        }
+        .proprietor-message footer {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #f97316;
+            margin-top: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Parallax Background */
+        .parallax-section {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Pulse Animation */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        /* Why Choose Us Section Container */
+        .features-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* Animated Background */
+        .animated-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(249,115,22,0.05) 0%, rgba(234,88,12,0.05) 100%);
+            opacity: 0.5;
+            z-index: 0;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ea580c;
+        }
+        
+        /* Stats Section */
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin: 60px 0;
+        }
+        .stat-box {
+            text-align: center;
+            background: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            min-width: 200px;
+            transition: all 0.3s ease;
+        }
+        .stat-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #f97316;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+        .stat-text {
+            font-size: 1.1rem;
+            color: #475569;
+        }
+        
+        /* Testimonial Section */
+        .testimonial-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+            margin: 20px;
+        }
+        .testimonial-card::before {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: #f97316;
+            opacity: 0.1;
+            font-family: Georgia, serif;
+        }
+        .testimonial-text {
+            font-size: 1.1rem;
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        .author-info h4 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #1e293b;
+        }
+        .author-info p {
+            margin: 0;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        /* Why Choose Us Section with Icons */
+        .features-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        /* Team Section */
+        .team-member {
+            text-align: center;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .team-photo {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        .team-info {
+            padding: 20px;
+        }
+        .team-info h3 {
+            margin: 10px 0 5px;
+            color: #1e293b;
+        }
+        .team-info p {
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+        
+        /* Animated Counter */
+        .counter {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #f97316;
+            line-height: 1;
+        }
+
+        /* Styling for header icons carousel */
+        .header-icon-container {
+            position: relative;
+            width: 48px; /* Increased width for larger icons */
+            height: 48px; /* Increased height for larger icons */
+            margin-right: 0.75rem; /* Slightly more spacing */
+        }
+        .header-icon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Ensures the whole icon is visible */
+            transition: opacity 0.5s ease-in-out; /* Smooth fade effect */
+            opacity: 0; /* Hidden by default */
+            pointer-events: none; /* Make icons non-interactive when hidden */
+        }
+        .header-icon.active {
+            opacity: 1;
+            pointer-events: auto; /* Make active icon interactive */
+            animation: floatIcon 2s infinite ease-in-out; /* Apply floating animation */
+        }
+
+        /* Animation for the title text */
+        .animated-title {
+            display: inline-block; /* Allows transform */
+            animation: bounceText 4s infinite ease-in-out;
+        }
+
+        @keyframes bounceText {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); } /* Subtle up and down float */
+        }
+
+         /* Updated animations for vehicles */
+        .logo-container {
+            position: relative;
+            display: inline-block;
+            padding-left: 0px;
+            font-size: 35px;
+        }
+        .vehicle-icon {
+            position: absolute;
+            z-index: 10;
+            transition: all 0.5s ease-out;
+            object-fit: contain;
+        }
+        .car-icon {
+            width: 80px;
+            top: -8px;
+            left: -25px;
+            animation: carDrive 8s linear infinite;
+        }
+        .bus-icon {
+            width: 50px;
+            top: -15px;
+            left: -30px;
+            animation: busDrive 12s linear infinite 2s;
+        }
+        .flight-icon {
+            width: 28px;
+            top: -10px;
+            left: -35px;
+            animation: flightMove 10s linear infinite 1s;
+        }
+        
+        @keyframes carDrive {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            10% { transform: translateX(10px) translateY(3px); }
+            20% { transform: translateX(25px) translateY(-2px); }
+            30% { transform: translateX(40px) translateY(1px); }
+            40% { transform: translateX(55px) translateY(-3px); }
+            50% { transform: translateX(70px) translateY(2px); }
+            60% { transform: translateX(85px) translateY(-1px); }
+            70% { transform: translateX(100px) translateY(3px); }
+            80% { transform: translateX(115px) translateY(-2px); }
+            90% { transform: translateX(130px) translateY(1px); }
+        }
+        
+        @keyframes busDrive {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(40px) translateY(-4px); }
+            50% { transform: translateX(80px) translateY(2px); }
+            75% { transform: translateX(120px) translateY(-3px); }
+        }
+        
+        @keyframes flightMove {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            20% { transform: translateX(20px) translateY(-5px); }
+            40% { transform: translateX(40px) translateY(3px); }
+            60% { transform: translateX(60px) translateY(-4px); }
+            80% { transform: translateX(80px) translateY(2px); }
+        }
+              /* Animation for the title text */
+        .animated-title {
+            display: inline-block; /* Allows transform */
+            animation: bounceText 4s infinite ease-in-out;
+        }
+
+        @keyframes bounceText {
+            0%, 100% { transform: translateY(50%); }
+            50% { transform: translateY(-3px); }
+        }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(50%); }
+            50% { transform: translateY(-5px); } /* Subtle up and down float */
+        }
+
+
+    </style>
+</head>
+<body>
+    <!-- Floating WhatsApp and Instagram Icons -->
+<div class="fixed bottom-6 right-6 flex flex-col items-end space-y-3 z-50">
+
+  <!-- WhatsApp Button -->
+  <a href="https://wa.me/918247853622" target="_blank"
+     class="bg-green-500 hover:bg-green-600 text-white p-3 rounded-full shadow-lg">
+    <i class="fab fa-whatsapp fa-lg"></i>
+  </a>
+
+  <!-- Instagram Button -->
+  <a href="https://www.instagram.com/YOUR_USERNAME" target="_blank"
+     class="bg-pink-500 hover:bg-pink-600 text-white p-3 rounded-full shadow-lg">
+    <i class="fab fa-instagram fa-lg"></i>
+  </a>
+
+</div>
+    <!-- Header -->
+    <header class="bg-white shadow-sm py-4 fixed w-full z-50">
+        <nav class="container mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8">
+            <a href="index8.html" class="text-2xl font-bold text-orange-500 relative">
+                <div class="logo-container">
+                    <!-- Vehicle Icons as images -->
+                    <img src="https://cdn-icons-png.flaticon.com/512/55/55283.png" alt="Car" class="vehicle-icon car-icon">
+                    <img src="https://cdn-icons-png.flaticon.com/512/744/744465.png" alt="Bus" class="vehicle-icon bus-icon">
+                    <!-- <img src="https://cdn-icons-png.flaticon.com/512/1820/1820805.png" alt="Flight" class="vehicle-icon flight-icon"> -->
+                    
+                <span class="animated-title">Sai Dharma Tours & Travels</span>
+                </div>
+            </a>
+            <div class="hidden md:flex space-x-8">
+                <a href="index8.html" class="text-gray-600 hover:text-orange-500 font-medium transition duration-300">Home</a>
+                <a href="about3.html" class="text-gray-600 hover:text-orange-500 font-medium transition duration-300">About Us</a>
+                <a href="services2.html" class="text-gray-600 hover:text-orange-500 font-medium transition duration-300">Services</a>
+                <a href="gallery.html" class="text-gray-600 hover:text-orange-500 font-medium transition duration-300">Gallery</a>
+                <a href="contact.html" class="text-gray-600 hover:text-orange-500 font-medium transition duration-300">Contact</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 hover:text-orange-500 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-2 shadow-md">
+            <a href="index8.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Home</a>
+            <a href="about3.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">About Us</a>
+            <a href="services2.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Services</a>
+            <a href="gallery.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Gallery</a>
+            <a href="contact.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Contact</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- About Us Hero Section -->
+        <section class="about-hero-section" id="about-us">
+            <div class="about-hero-content">
+                <h1>About Sai Dharma Tours & Travels</h1>
+                <p class="animate-fade-in">Your journey, our passion. Discover the world with us.</p>
+            </div>
+            <!-- Floating elements -->
+            <div class="absolute top-20 left-10 w-8 h-8 rounded-full bg-orange-400 opacity-30 floating" style="animation-delay: 0.2s;"></div>
+            <div class="absolute bottom-20 right-10 w-12 h-12 rounded-full bg-orange-500 opacity-20 floating" style="animation-delay: 0.4s;"></div>
+            <div class="absolute top-1/3 right-1/4 w-6 h-6 rounded-full bg-orange-300 opacity-40 floating" style="animation-delay: 0.6s;"></div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="py-16 bg-white px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+            <div class="animated-bg"></div>
+            <div class="container mx-auto text-center relative z-10">
+                <h2 class="text-3xl font-bold mb-12 section-heading text-gray-800 slide-up-animation">Our Journey in Numbers</h2>
+                
+                <div class="stats-container">
+                    <div class="stat-box slide-up-animation">
+                        <div class="counter" data-count="6">15+</div>
+                        <div class="stat-text">Years of Experience</div>
+                    </div>
+                    <div class="stat-box slide-up-animation">
+                        <div class="counter" data-count="10000">15+</div>
+                        <div class="stat-text">Happy Customers</div>
+                    </div>
+                    <div class="stat-box slide-up-animation">
+                        <div class="counter" data-count="150">500+</div>
+                        <div class="stat-text">Destinations Covered</div>
+                    </div>
+                    <div class="stat-box slide-up-animation">
+                        <div class="counter" data-count="50">100+</div>
+                        <div class="stat-text">Expert Team Members</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Customized South India Tours Section -->
+        <section class="py-16 bg-gradient-to-br from-white to-slate-50 px-4 sm:px-6 lg:px-8">
+            <div class="container mx-auto">
+                <div class="flex flex-col lg:flex-row items-center gap-12">
+                    <div class="lg:w-1/2 slide-up-animation">
+                        <h2 class="text-3xl font-bold mb-6 section-heading text-gray-800">Customized South India Tours to Suit Your Budget</h2>
+                        <div class="text-lg text-gray-600 leading-relaxed">
+                            <p class="mb-4">
+                                At Sai Dharma Tours and Travels, we craft customized itineraries that showcase the rich heritage and natural beauty of South India. Whether you want to explore ancient temples, wander through lush gardens, marvel at historical monuments, relax on serene beaches, or immerse yourself in wildlife and waterfalls, we ensure an unforgettable journey.
+                            </p>
+                            <p>
+                                Our personalized tours are tailored to your preferences and budget, promising a seamless and memorable experience. With our expert guidance and local knowledge, you'll discover the true essence of South India.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2 slide-up-animation">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1528543606781-2f6e6857f318?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&q=80" 
+                                 alt="South India Tours" 
+                                 class="rounded-xl shadow-lg w-full h-auto object-cover transform transition-transform duration-500 hover:scale-105">
+                            <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-orange-400 rounded-full z-0 pulse"></div>
+                            <div class="absolute -top-6 -left-6 w-24 h-24 bg-orange-300 rounded-full z-0 floating" style="animation-delay: 0.3s;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Sai Dharma Tours and Travels? Section -->
+        <section class="features py-16 bg-slate-50 px-4 sm:px-6 lg:px-8 relative" id="why-choose-us-section">
+            <div class="animated-bg"></div>
+            <div class="container mx-auto relative z-10">
+                <div class="section-title">
+                    <h2 class="slide-up-animation">Why Choose Sai Dharma Tours and Travels?</h2>
+                    <p class="slide-up-animation">We provide the best travel experiences with our exceptional services.</p>
+                </div>
+                <div class="features-container mt-12">
+                    <div class="why-choose-card-new slide-up-animation">
+                        <div class="icon-container">
+                            <img src="https://cdn-icons-png.flaticon.com/512/681/681494.png" alt="Decades of Expertise Icon" class="feature-image">
+                        </div>
+                        <h3>Decades of Expertise</h3>
+                        <p>With over 6 years in the tourism industry, we know South India like the back of our hand.</p>
+                    </div>
+                    <div class="why-choose-card-new slide-up-animation">
+                        <div class="icon-container">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3237/3237472.png" alt="24/7 Support Icon" class="feature-image">
+                        </div>
+                        <h3>24/7 Support</h3>
+                        <p>Managed by Mr. Naresh, an experienced professional in organizing tours, we are at your service round the clock.</p>
+                    </div>
+                    <div class="why-choose-card-new slide-up-animation">
+                        <div class="icon-container">
+                            <img src="https://cdn-icons-png.flaticon.com/512/1006/1006585.png" alt="Trusted Travel Partner Icon" class="feature-image">
+                        </div>
+                        <h3>Trusted Travel Partner</h3>
+                        <p>From smooth travel arrangements to curated sightseeing experiences, our goal is to make your trip stress-free and enjoyable.</p>
+                    </div>
+                    <div class="why-choose-card-new slide-up-animation">
+                        <div class="icon-container">
+                            <img src="https://cdn-icons-png.flaticon.com/512/854/854878.png" alt="Global Destinations Icon" class="feature-image">
+                        </div>
+                        <h3>Global Destinations</h3>
+                        <p>Explore over 100 destinations worldwide with our carefully curated travel packages.</p>
+                    </div>
+                    <div class="why-choose-card-new slide-up-animation">
+                        <div class="icon-container">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" alt="Best Price Guarantee Icon" class="feature-image">
+                        </div>
+                        <h3>Best Price Guarantee</h3>
+                        <p>We offer competitive prices with no hidden fees. Find a lower price? We'll match it!</p>
+                    </div>
+                    <div class="why-choose-card-new slide-up-animation">
+                        <div class="icon-container">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3097/3097008.png" alt="Well-Maintained Vehicles Icon" class="feature-image">
+                        </div>
+                        <h3>Well-Maintained Vehicles</h3>
+                        <p>Our fleet is regularly serviced and maintained to ensure a safe and smooth journey for you.</p>
+                    </div>
+                    <div class="why-choose-card-new slide-up-animation">
+                        <div class="icon-container">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3142/3142021.png" alt="Affordable Car Rentals Icon" class="feature-image">
+                        </div>
+                        <h3>Affordable Car Rentals</h3>
+                        <p>Enjoy competitive pricing without compromising on quality or convenience.</p>
+                    </div>
+                    <div class="why-choose-card-new slide-up-animation">
+                        <div class="icon-container">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3058/3058972.png" alt="Experienced Drivers Icon" class="feature-image">
+                        </div>
+                        <h3>Experienced Drivers</h3>
+                        <p>Travel with confidence, guided by drivers who have over 15 years of professional experience.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="py-16 bg-white px-4 sm:px-6 lg:px-8">
+            <div class="container mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-12 section-heading text-gray-800 slide-up-animation">Meet Our Expert Team</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="team-member slide-up-animation">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                             alt="Tour Manager" class="team-photo">
+                        <div class="team-info">
+                            <h3>Rajesh Kumar</h3>
+                            <p>Tour Operations Manager</p>
+                            <p class="text-sm text-gray-600">10+ years experience in travel management</p>
+                        </div>
+                    </div>
+                    <div class="team-member slide-up-animation">
+                        <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                             alt="Travel Consultant" class="team-photo">
+                        <div class="team-info">
+                            <h3>Priya Sharma</h3>
+                            <p>Senior Travel Consultant</p>
+                            <p class="text-sm text-gray-600">Specializes in luxury tours and honeymoons</p>
+                        </div>
+                    </div>
+                    <div class="team-member slide-up-animation">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                             alt="Customer Support" class="team-photo">
+                        <div class="team-info">
+                            <h3>Ananya Patel</h3>
+                            <p>Customer Support Head</p>
+                            <p class="text-sm text-gray-600">Ensures seamless travel experiences</p>
+                        </div>
+                    </div>
+                    <div class="team-member slide-up-animation">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                             alt="Tour Guide" class="team-photo">
+                        <div class="team-info">
+                            <h3>Vikram Singh</h3>
+                            <p>Chief Tour Guide</p>
+                            <p class="text-sm text-gray-600">15 years guiding experience in South India</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Explore South India’s Hidden Gems Section -->
+        <section class="py-16 parallax-section" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80')">
+            <div class="bg-black bg-opacity-60 py-16">
+                <div class="container mx-auto text-center">
+                    <h2 class="text-3xl font-bold mb-12 section-heading text-white slide-up-animation">Explore South India’s Hidden Gems</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="gem-card slide-up-animation">
+                            <img src="images/a1.jpeg" alt="Ancient Temples">
+                            <div class="gem-info">
+                                <h3>Sacred & Ancient Temples</h3>
+                                <p>Steeped in history and culture, offering spiritual solace and architectural marvels.</p>
+                                <a href="#" class="learn-more">Learn More →</a>
+                            </div>
+                        </div>
+                        <div class="gem-card slide-up-animation">
+                            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Picturesque Beaches">
+                            <div class="gem-info">
+                                <h3>Picturesque Beaches</h3>
+                                <p>With golden sands and crystal-clear waters, perfect for relaxation and sunbathing.</p>
+                                <a href="#" class="learn-more">Learn More →</a>
+                            </div>
+                        </div>
+                        <div class="gem-card slide-up-animation">
+                            <img src="images/w1.jpeg" alt="Majestic Waterfalls">
+                            <div class="gem-info">
+                                <h3>Majestic Waterfalls & Lush Landscapes</h3>
+                                <p>Discover breathtaking cascades and verdant scenery that invigorate the soul.</p>
+                                <a href="#" class="learn-more">Learn More →</a>
+                            </div>
+                        </div>
+                        <div class="gem-card slide-up-animation">
+                            <img src="images/g1.jpg" alt="Wildlife Sanctuaries">
+                            <div class="gem-info">
+                                <h3>Enchanting Wildlife Sanctuaries</h3>
+                                <p>For nature enthusiasts to immerse themselves in diverse flora and fauna.</p>
+                                <a href="#" class="learn-more">Learn More →</a>
+                            </div>
+                        </div>
+                        <div class="gem-card slide-up-animation">
+                            <img src="images/c1.jpeg" alt="Historical Monuments">
+                            <div class="gem-info">
+                                <h3>Stunning Historical Monuments</h3>
+                                <p>That tell the captivating story of India’s rich heritage and glorious past.</p>
+                                <a href="#" class="learn-more">Learn More →</a>
+                            </div>
+                        </div>
+                        <div class="gem-card slide-up-animation">
+                            <img src="images/g4.jpeg" alt="Hill Stations">
+                            <div class="gem-info">
+                                <h3>Serene Hill Stations</h3>
+                                <p>Escape to cool mountain retreats with panoramic views and refreshing air.</p>
+                                <a href="#" class="learn-more">Learn More →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="py-16 bg-gradient-to-r from-orange-50 to-amber-50 px-4 sm:px-6 lg:px-8">
+            <div class="container mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-12 section-heading text-gray-800 slide-up-animation">What Our Travelers Say</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <div class="testimonial-card slide-up-animation">
+                        <div class="testimonial-text">
+                            "Our South India tour with Sai Dharma was simply amazing! The itinerary was perfectly tailored to our interests, and our guide Vikram was incredibly knowledgeable. The temples, beaches, and hill stations were all breathtaking."
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Sarah Johnson">
+                            <div class="author-info">
+                                <h4>Sarah Johnson</h4>
+                                <p>Australia, Family Vacation</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card slide-up-animation">
+                        <div class="testimonial-text">
+                            "The attention to detail and personalized service from Sai Dharma Tours exceeded our expectations. From the comfortable vehicles to the handpicked accommodations, everything was perfect. We'll definitely be using them again for our next India trip!"
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Michael Chen">
+                            <div class="author-info">
+                                <h4>Michael Chen</h4>
+                                <p>Singapore, Cultural Tour</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- A Message from Our Proprietor Section -->
+        <section class="py-16 px-4 sm:px-6 lg:px-8">
+            <div class="container mx-auto proprietor-message slide-up-animation">
+                <h2 class="text-3xl font-bold mb-8 section-heading text-gray-800">A Message from Our Proprietor</h2>
+                <blockquote>
+                    "At Sai Dharma Tours and Travels, I am committed to delivering reliable, high-quality, and personalized travel services. Your satisfaction is my priority, and it is my honor to make your journey in South India memorable and fulfilling. We believe in creating experiences that stay with you long after your journey ends."
+                </blockquote>
+                <footer>— Mr. Naresh, Proprietor</footer>
+                <div class="mt-8 flex justify-center">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80" 
+                         alt="Mr. Naresh" 
+                         class="w-32 h-32 rounded-full border-4 border-orange-400 object-cover shadow-lg">
+                </div>
+            </div>
+        </section>
+
+        <!-- Book Your South India Adventure Today Call to Action -->
+        <section class="py-16 bg-gradient-to-r from-orange-500 to-amber-500 px-4 sm:px-6 lg:px-8 text-center">
+            <div class="container mx-auto max-w-4xl slide-up-animation">
+                <h2 class="text-3xl font-bold mb-6 text-white">Book Your South India Adventure Today</h2>
+                <p class="text-lg text-white mb-8">
+                    Discover the magic of South India with Sai Dharma Tours and Travels, your trusted partner for tailor-made travel services in South India.
+                </p>
+                <a href="index.html#contact" class="bg-white text-orange-600 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transition duration-300 button-hover-effect">
+                    Contact Us Now to Plan Your Next Adventure!
+                </a>
+                <div class="mt-8 flex justify-center space-x-4">
+                    <div class="bg-white bg-opacity-20 p-4 rounded-full">
+                        <i class="fas fa-phone-alt text-white text-xl"></i>
+                    </div>
+                    <div class="bg-white bg-opacity-20 p-4 rounded-full">
+                        <i class="fas fa-envelope text-white text-xl"></i>
+                    </div>
+                    <div class="bg-white bg-opacity-20 p-4 rounded-full">
+                        <i class="fab fa-whatsapp text-white text-xl"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <!-- <footer class="bg-gray-800 text-white py-12 px-4 sm:px-6 lg:px-8">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-orange-400">Sai Dharma Tours & Travels</h3>
+                    <p class="text-gray-300">Creating unforgettable travel experiences across South India since 2017.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#home" class="text-gray-300 hover:text-orange-400 transition">Home</a></li>
+                        <li><a href="#about-us" class="text-gray-300 hover:text-orange-400 transition">About Us</a></li>
+                        <li><a href="index.html#services" class="text-gray-300 hover:text-orange-400 transition">Services</a></li>
+                        <li><a href="index.html#gallery" class="text-gray-300 hover:text-orange-400 transition">Gallery</a></li>
+                        <li><a href="index.html#contact" class="text-gray-300 hover:text-orange-400 transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Us</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-orange-400"></i>
+                            <span>123 Travel Street, Chennai, Tamil Nadu</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-3 text-orange-400"></i>
+                            <span>+91 98765 43210</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-3 text-orange-400"></i>
+                            <span>info@saidharmatours.com</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="bg-gray-700 hover:bg-orange-500 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="bg-gray-700 hover:bg-orange-500 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="bg-gray-700 hover:bg-orange-500 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="bg-gray-700 hover:bg-orange-500 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                    <div class="mt-6">
+                        <h5 class="font-semibold mb-2">Subscribe to Newsletter</h5>
+                        <div class="flex">
+                            <input type="email" placeholder="Your email" class="px-3 py-2 rounded-l w-full text-gray-800">
+                            <button class="bg-orange-500 hover:bg-orange-600 px-4 rounded-r">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 Sai Dharma Tours & Travels. All rights reserved.</p>
+            </div>
+        </div>
+    </footer> -->
+        <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 px-4 sm:px-6 lg:px-8">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-xl font-bold mb-4 text-orange-500">Sai Dharma Tours & Travels</h3>
+                <p class="text-gray-400 mb-4">
+                    Your trusted partner for all your travel needs. Providing exceptional service since 2010.
+                </p>
+                  <div class="flex space-x-4">
+                        <a href="#" class="bg-gray-700 hover:bg-orange-500 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="bg-gray-700 hover:bg-orange-500 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="bg-gray-700 hover:bg-orange-500 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="bg-gray-700 hover:bg-orange-500 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+            </div>
+            
+            <div>
+                <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="#home" class="text-gray-400 hover:text-white transition duration-300">Home</a></li>
+                    <li><a href="#about-us" class="text-gray-400 hover:text-white transition duration-300">About Us</a></li>
+                    <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Services</a></li>
+                    <li><a href="#gallery" class="text-gray-400 hover:text-white transition duration-300">Gallery</a></li>
+                    <li><a href="#contact" class="text-gray-400 hover:text-white transition duration-300">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="text-lg font-bold mb-4">Services</h3>
+                <ul class="space-y-2">
+                    <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Car Rentals & Taxi</a></li>
+                    <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Bus & Flight Ticket Booking</a></li>
+                    <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Hotel Bookings</a></li>
+                    <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">South India Tour Packages</a></li>
+                    <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Foreign Exchange</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="text-lg font-bold mb-4">Tours & Packages</h3>
+                <ul class="space-y-2">
+                    <li><a href="#gallery" class="text-gray-400 hover:text-white transition duration-300">Puttaparthi</a></li>
+                    <li><a href="#gallery" class="text-gray-400 hover:text-white transition duration-300">Andhra Pradesh</a></li>
+                    <li><a href="#gallery" class="text-gray-400 hover:text-white transition duration-300">Karnataka</a></li>
+                    <!-- Add more tour packages as needed -->
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+                <ul class="space-y-3 text-gray-400">
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 mr-2 mt-0.5 text-orange-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Opp: Gopuram Main Gate, Shop No-07, Puttaparthi - 515134, Sri Sathya Sai Dist., AP.</span>
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-orange-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+                        </svg>
+                        <span>+91 9652399534</span>
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-orange-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                        </svg>
+                        <span>nareshdasariroyal@gmail.com</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="container mx-auto text-center mt-10 pt-6 border-t border-gray-700">
+            <p>&copy; 2023 Sai Dharma Tours & Travels. All rights reserved.</p>
+            <div class="flex justify-center space-x-4 mt-4">
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300">Privacy Policy</a>
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when a link is clicked
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Animate counters if present
+                    if (entry.target.classList.contains('counter')) {
+                        animateCounter(entry.target);
+                    }
+                } else {
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.slide-up-animation').forEach(element => {
+            observer.observe(element);
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Check if the target is on the current page or another page
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+
+                if (targetElement) {
+                    // If target is on the current page, scroll to it
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                } else {
+                    // If target is on another page (e.g., index.html), navigate
+                    window.location.href = this.getAttribute('href');
+                }
+            });
+        });
+        
+        // Animated counter
+        function animateCounter(element) {
+            const target = parseInt(element.getAttribute('data-count'));
+            const duration = 2000; // 2 seconds
+            const frameDuration = 1000 / 60; // 60fps
+            const totalFrames = Math.round(duration / frameDuration);
+            let frame = 0;
+            
+            // If already animated, skip
+            if (element.classList.contains('animated')) return;
+            element.classList.add('animated');
+            
+            const counter = setInterval(() => {
+                frame++;
+                const progress = frame / totalFrames;
+                const currentCount = Math.round(target * progress);
+                
+                if (parseInt(element.textContent) !== currentCount) {
+                    element.textContent = currentCount;
+                }
+                
+                if (frame === totalFrames) {
+                    clearInterval(counter);
+                }
+            }, frameDuration);
+        }
+        
+        // Initialize counters if they're in view on page load
+        document.querySelectorAll('.counter').forEach(counter => {
+            const rect = counter.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom >= 0) {
+                animateCounter(counter);
+            }
+        });
+        
+        // Add floating animation to elements
+        document.querySelectorAll('.floating').forEach(el => {
+            const delay = Math.random() * 2;
+            el.style.animationDelay = `${delay}s`;
+        });
+        
+        // Add hover effect to all cards
+        document.querySelectorAll('.card-hover-effect').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-8px)';
+                card.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.1)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = '';
+            });
+        });
+        
+        // Parallax effect
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.pageYOffset;
+            document.querySelectorAll('.parallax-section').forEach(section => {
+                section.style.backgroundPositionY = `${scrollPosition * 0.5}px`;
+            });
+        });
+
+        // Header Icons
+    </script>
+</body>
+</html>
